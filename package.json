@@ -30,12 +30,12 @@
     "tdd",
     "library"
   ],
-  "author": "Willian Justen <willianjustenqui@gmail.com> (https://willianjusten.com.br/)",
+  "author": "Guilherme Lacerda",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/willianjusten/js-tdd-course/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/willianjusten/js-tdd-course#readme",
+  "homepage": "",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.3.2",
