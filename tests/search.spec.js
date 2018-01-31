@@ -8,13 +8,13 @@ import {
     searchArtists,
     searchTracks,
     searchPlaylists
-} from '../src/main';
+} from '../src/search';
 
 chai.use(sinonChai);
 sinonStubPromise(sinon);
 global.fetch = require('node-fetch');
 
-describe('spotify wrapper', () => {
+describe('search', () => {
     let fetchedStub;
     let promise;
     
