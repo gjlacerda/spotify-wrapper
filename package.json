@@ -1,5 +1,5 @@
 {
-  "name": "spotify-wrapper",
+  "name": "node-spotify-wrapper",
   "version": "1.0.0",
   "description": "Nossa biblioteca do curso de JS com TDD na prática.",
   "main": "lib/index.js",
