@@ -81,9 +81,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 var API_URL = exports.API_URL = 'https://api.spotify.com/v1';
+
+var FETCH_CONFIG = exports.FETCH_CONFIG = {
+    headers: {
+        'Authorization': 'Bearer BQCDt24npGlevr6zVuBawlVZHap_8p7ZDDsRVojJ-6QTlcBl49oVBHwi9qWy9_8FhaHJ6Nbb_qj6dL6x2chmu54cOvf4TuEuRgQ7e6pf44AV1n2990U63rGOmZ1umcMtAvv5y7AnX5Pv7s8'
+    }
+};
 
 /***/ }),
 /* 1 */
@@ -138,23 +144,23 @@ var _config = __webpack_require__(0);
 var _utils = __webpack_require__(1);
 
 var search = exports.search = function search(query, type) {
-    fetch(_config.API_URL + '/search?q=' + query + '&type=' + type).then(_utils.toJSON);
+    return fetch(_config.API_URL + '/search?q=' + query + '&type=' + type, _config.FETCH_CONFIG).then(_utils.toJSON);
 };
 
 var searchArtists = exports.searchArtists = function searchArtists(query) {
-    search(query, 'artist');
+    return search(query, 'artist');
 };
 
 var searchAlbums = exports.searchAlbums = function searchAlbums(query) {
-    search(query, 'album');
+    return search(query, 'album');
 };
 
 var searchTracks = exports.searchTracks = function searchTracks(query) {
-    search(query, 'track');
+    return search(query, 'track');
 };
 
 var searchPlaylists = exports.searchPlaylists = function searchPlaylists(query) {
-    search(query, 'playlist');
+    return search(query, 'playlist');
 };
 
 /***/ }),
@@ -174,15 +180,15 @@ var _config = __webpack_require__(0);
 var _utils = __webpack_require__(1);
 
 var getAlbum = exports.getAlbum = function getAlbum(id) {
-    fetch(_config.API_URL + '/albums/' + id).then(_utils.toJSON);
+    return fetch(_config.API_URL + '/albums/' + id).then(_utils.toJSON);
 };
 
 var getAlbums = exports.getAlbums = function getAlbums(ids) {
-    fetch(_config.API_URL + '/albums/?ids=' + ids).then(_utils.toJSON);
+    return fetch(_config.API_URL + '/albums/?ids=' + ids).then(_utils.toJSON);
 };
 
 var getAlbumsTracks = exports.getAlbumsTracks = function getAlbumsTracks(id) {
-    fetch(_config.API_URL + '/albums/' + id + '/tracks').then(_utils.toJSON);
+    return fetch(_config.API_URL + '/albums/' + id + '/tracks').then(_utils.toJSON);
 };
 
 /***/ })

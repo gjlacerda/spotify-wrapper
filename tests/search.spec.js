@@ -12,7 +12,9 @@ import {
 
 chai.use(sinonChai);
 sinonStubPromise(sinon);
+
 global.fetch = require('node-fetch');
+global.Headers = () => {};
 
 describe('search', () => {
     let fetchedStub;
