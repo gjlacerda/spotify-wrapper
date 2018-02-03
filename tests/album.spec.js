@@ -2,21 +2,21 @@ import chai, {expect} from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise from 'sinon-stub-promise';
-import {
-    getAlbum,
-    getAlbums,
-    getAlbumsTracks
-} from '../src/album';
+import SpotifyWrapper from '../src/index';
 
 chai.use(sinonChai);
 sinonStubPromise(sinon);
 global.fetch = require('node-fetch');
 
 describe('album', () => {
+    let spotifyWrapper;
     let stubedFetch;
     let promise;
 
     beforeEach(() => {
+        spotifyWrapper = new SpotifyWrapper({
+            token: 'foo'
+        });
         stubedFetch = sinon.stub(global, 'fetch');
         promise = stubedFetch.returnsPromise();
     });
@@ -27,29 +27,29 @@ describe('album', () => {
 
     describe('smoke tests', () => {
         it('should have getAlbum method', () => {
-            expect(getAlbum).to.exist;
+            expect(spotifyWrapper.album.getAlbum).to.exist;
         });
 
         it('should have getAlbums method', () => {
-            expect(getAlbums).to.exist;
+            expect(spotifyWrapper.album.getAlbums).to.exist;
         });
 
         it('should have getAlbumTracks method', () => {
-            expect(getAlbumsTracks).to.exist;
+            expect(spotifyWrapper.album.getAlbumsTracks).to.exist;
         });
     });
 
     describe('getAlbum', () => {
         it('should call fetch method', () => {
-            const album = getAlbum();
+            const album = spotifyWrapper.album.getAlbum();
             expect(stubedFetch).to.have.been.calledOnce;
         });
 
         it('should call fetch with the correct URL', () => {
-            const album = getAlbum('123');
+            const album = spotifyWrapper.album.getAlbum('123');
             expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums/123');
 
-            const album2 = getAlbum('1234');
+            const album2 = spotifyWrapper.album.getAlbum('1234');
             expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums/1234');
         });
 
@@ -57,7 +57,7 @@ describe('album', () => {
             promise.resolves({
                 album: 'name'
             });
-            const album = getAlbum('123');
+            const album = spotifyWrapper.album.getAlbum('123');
 //            expect(album.resolveValue).to.be.eql({
 //                album: 'name'
 //            });
@@ -66,12 +66,12 @@ describe('album', () => {
 
     describe('getAlbums', () => {
         it('should call fetch method', () => {
-            const album = getAlbums();
+            const album = spotifyWrapper.album.getAlbums();
             expect(stubedFetch).to.have.been.calledOnce;
         });
 
         it('should call fetch with the correct URL', () => {
-            const album = getAlbums(['123', '456']);
+            const album = spotifyWrapper.album.getAlbums(['123', '456']);
             expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums/?ids=123,456');
         });
 
@@ -79,7 +79,7 @@ describe('album', () => {
             promise.resolves({
                 album: 'name'
             });
-            const album = getAlbums(['123', '456']);
+            const album = spotifyWrapper.album.getAlbums(['123', '456']);
             //            expect(album.resolveValue).to.be.eql({
             //                album: 'name'
             //            });
@@ -88,12 +88,12 @@ describe('album', () => {
 
     describe('getAlbumsTracks', () => {
         it('should call fetch method', () => {
-            const tracks = getAlbumsTracks();
+            const tracks = spotifyWrapper.album.getAlbumsTracks();
             expect(stubedFetch).to.have.been.calledOnce;
         });
 
         it('should call fetch with the correct URL', () => {
-            const tracks = getAlbumsTracks('123');
+            const tracks = spotifyWrapper.album.getAlbumsTracks('123');
             expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums/123/tracks');
         });
 
@@ -101,7 +101,7 @@ describe('album', () => {
             promise.resolves({
                 album: 'name'
             });
-            const album = getAlbumsTracks(['123', '456']);
+            const album = spotifyWrapper.album.getAlbumsTracks(['123', '456']);
             //            expect(album.resolveValue).to.be.eql({
             //                album: 'name'
             //            });
