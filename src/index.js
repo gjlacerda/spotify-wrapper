@@ -10,14 +10,20 @@ import {
     getAlbums,
     getAlbumsTracks
 } from './album';
+import {API_URL} from './config';
 
-module.exports = {
-    search,
-    searchAlbums,
-    searchArtists,
-    searchPlaylists,
-    searchTracks,
-    getAlbum,
-    getAlbums,
-    getAlbumsTracks
-};
+export default class SpotifyWrapper {
+    constructor(params = {}) {
+        this.apiURL = params.apiURL || API_URL;
+        this.token = params.token;
+    }
+
+    request(url) {
+        const params = {
+            headers: {
+                'Authorization': `Bearer ${this.token}`
+            }
+        };
+        return fetch(url, params);
+    }
+}
