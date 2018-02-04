@@ -10,7 +10,10 @@
     <div id="albums"></div>
     <script src="../dist/spotify-wrapper.umd.js"></script>
     <script>
-        const albums = spotifyWrapper.searchAlbums('incubus');
+        const spotify = new SpotifyWrapper({
+            token: 'BQBe_RFQ8EsJdW7fR3lPLPMSx1SUMbe3GrFRTIEWuMNgLz0brgZkaGIVOlIgxXQAndaOGTkEzJD0x7N6mXLYYX_QIcoPNYMrjcRrRmcnzilacpt1oibAnJidr-G8lbxw5T4FMM1Y_n1Wr1U'
+        });
+        const albums = spotify.search.albums('incubus');
         const $albums = document.getElementById('albums');
         albums.then(data => {
             const markup = data.albums.items.map(item => `<img src="${item.images[0].url}"/>`).join('');

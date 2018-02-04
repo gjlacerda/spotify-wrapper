@@ -2,7 +2,7 @@ import search from './search';
 import album from './album';
 import {API_URL} from './config';
 
-export default class SpotifyWrapper {
+class SpotifyWrapper {
     constructor(params = {}) {
         this.apiURL = params.apiURL || API_URL;
         this.token = params.token;
@@ -16,6 +16,9 @@ export default class SpotifyWrapper {
                 'Authorization': `Bearer ${this.token}`
             }
         };
-        return fetch(url, params);
+        return fetch(url, params)
+            .then(response => response.json());
     }
 }
+
+module.exports = SpotifyWrapper;
