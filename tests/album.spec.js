@@ -58,9 +58,9 @@ describe('album', () => {
                 album: 'name'
             });
             const album = spotifyWrapper.album.getAlbum('123');
-//            expect(album.resolveValue).to.be.eql({
-//                album: 'name'
-//            });
+           expect(album.resolveValue).to.be.eql({
+               album: 'name'
+           });
         });
     });
 
@@ -80,9 +80,9 @@ describe('album', () => {
                 album: 'name'
             });
             const album = spotifyWrapper.album.getAlbums(['123', '456']);
-            //            expect(album.resolveValue).to.be.eql({
-            //                album: 'name'
-            //            });
+            expect(album.resolveValue).to.be.eql({
+                album: 'name'
+            });
         });
     });
 
@@ -102,9 +102,9 @@ describe('album', () => {
                 album: 'name'
             });
             const album = spotifyWrapper.album.getAlbumsTracks(['123', '456']);
-            //            expect(album.resolveValue).to.be.eql({
-            //                album: 'name'
-            //            });
+            expect(album.resolveValue).to.be.eql({
+                album: 'name'
+            });
         });
     });
 });
